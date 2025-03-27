@@ -1,51 +1,43 @@
 body {
-    background-color: #0098ff;
-    display: grid;
-    place-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     min-height: 100vh;
-    overflow: hidden;
+    background: #3498db;
+    margin: 0;
 }
 
 .heart-pattern {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); /* Adjust size */
-    gap: 30px; /* Adjust the spacing between hearts */
-    width: 100vw;
-    height: 100vh;
+    grid-template-columns: repeat(6, 1fr); /* Adjust columns */
+    grid-gap: 30px; /* Adjust spacing between hearts */
 }
 
 .heart {
-    width: 60px;
-    height: 60px;
-    background-image: radial-gradient(circle at 30% 30%, #0098ff 30%, transparent 30%),
-                      radial-gradient(circle at 70% 30%, #0098ff 30%, transparent 30%),
-                      radial-gradient(circle at 50% 70%, #0098ff 30%, transparent 30%);
-    background-repeat: no-repeat;
-    background-position: 0px 0px, 0px 0px, 0px 0px;
-    background-size: 60% 60%;
+    width: 50px;
+    height: 50px;
     position: relative;
+    background-color: red;
+    transform: rotate(-45deg);
+    clip-path: polygon(50% 0%, 100% 35%, 100% 75%, 50% 100%, 0% 75%, 0% 35%);
 }
 
 .heart::before,
 .heart::after {
     content: "";
-    width: 30px;
-    height: 30px;
-    background-color: #66c3ff;
-    border-radius: 50%;
     position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: red;
+    border-radius: 50%;
 }
 
 .heart::before {
-    top: 0;
-    left: 15px;
-}
-
-.heart::after {
+    top: -25px;
     left: 0;
-    top: 15px;
 }
 
 .heart::after {
-    left: 30px;
+    left: 25px;
+    top: 0;
 }
