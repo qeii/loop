@@ -1,100 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Looping Hearts (RecordRTC Export)</title>
-  <style>
-    body {
-      margin: 0;
-      overflow: hidden;
-      background: linear-gradient(45deg, #ff9a9e, #fad0c4);
-    }
-    .heart {
-      position: absolute;
-      width: 30px;
-      height: 30px;
-      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="red" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') no-repeat;
-      animation: float 5s linear infinite;
-    }
-    @keyframes float {
-      0% { transform: translateY(100vh) rotate(0deg); }
-      100% { transform: translateY(-100px) rotate(360deg); }
-    }
-    #export-btn {
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      padding: 10px 20px;
-      background: #ff6b6b;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      z-index: 100;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Pattern</title>
 </head>
 <body>
-  <div id="animation-container"></div>
-  <button id="export-btn">Export as MP4</button>
-
-  <!-- Libraries -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/RecordRTC/5.6.2/RecordRTC.min.js"></script>
-  <script>
-    // Create floating hearts
-    const container = document.getElementById('animation-container');
-    const heartCount = 20;
-
-    for (let i = 0; i < heartCount; i++) {
-      const heart = document.createElement('div');
-      heart.className = 'heart';
-      heart.style.left = `${Math.random() * 100}vw`;
-      heart.style.animationDelay = `${Math.random() * 5}s`;
-      container.appendChild(heart);
-    }
-
-    // RecordRTC Export
-    let recorder;
-    document.getElementById('export-btn').addEventListener('click', async () => {
-      try {
-        const stream = await navigator.mediaDevices.getDisplayMedia({
-          video: {
-            mediaSource: 'screen',
-            width: { ideal: 1280 },
-            height: { ideal: 720 }
-          },
-          audio: false
-        });
-
-        recorder = new RecordRTC(stream, {
-          type: 'video',
-          mimeType: 'video/webm;codecs=vp9',
-          timeSlice: 1000, // Record in chunks (optional)
-          ondataavailable: (blob) => {
-            console.log("Recording blob:", blob);
-          }
-        });
-
-        recorder.startRecording();
-        alert("Recording started! Click OK to stop after 3 seconds.");
-
-        // Auto-stop after 3 seconds
-        setTimeout(async () => {
-          await recorder.stopRecording();
-          const blob = recorder.getBlob();
-          const url = URL.createObjectURL(blob);
-          const a = document.createElement('a');
-          a.href = url;
-          a.download = 'heart-loop.webm'; // WebM works better for RecordRTC
-          a.click();
-          stream.getTracks().forEach(track => track.stop());
-        }, 3000);
-      } catch (error) {
-        console.error("Error:", error);
-        alert("Recording failed. Please allow screen access.");
-      }
-    });
-  </script>
+    <div class="hearts"></div>
 </body>
 </html>
