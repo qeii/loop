@@ -1,6 +1,15 @@
+.vector-container {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* Creates 6 columns */
+    gap: 10px; /* Adds spacing between icons */
+    justify-content: center; /* Centers the grid */
+    align-items: center;
+    padding: 20px;
+}
+
 .vector-svg {
-    width: 250px; /* Match the SVG size */
+    width: 50px; /* Adjust size to fit the grid */
     height: 50px;
     filter: invert(100%) sepia(100%) saturate(10000%) hue-rotate(0deg);
-    /* This turns white to red */
+    /* White to red effect */
 }
