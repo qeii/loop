@@ -1,12 +1,12 @@
 const rows = 5;
 const cols = 6;
-const totalBurgers = rows * cols;
+const totalVectors = rows * cols;
 
-const container = document.querySelector('.burger-container');
+const container = document.querySelector('.vector-container');
 
-for (let i = 0; i < totalBurgers; i++) {
-    const burger = document.createElement('img');
-    burger.src = "white-burger.svg";
-    burger.classList.add('burger-icon');
-    container.appendChild(burger);
+for (let i = 0; i < totalVectors; i++) {
+    const vector = document.createElement('img');
+    vector.src = "heart.svg";
+    vector.classList.add('vector-svg');
+    container.appendChild(vector);
 }
